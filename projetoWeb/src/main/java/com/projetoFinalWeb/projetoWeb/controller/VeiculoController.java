@@ -37,6 +37,11 @@ public class VeiculoController {
         return this.veiculoService.buscarPorPlaca(placa);
     }
 
+    @GetMapping("/disponiveis")
+    public List<VeiculoDTO> listarVeiculosDisponiveis() {
+        return veiculoService.listarTodosDisponiveis();
+    }
+
     @PostMapping
     public ResponseEntity<VeiculoDTO> criar(@Valid @RequestBody VeiculoDTO veiculoDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(veiculoService.criar(veiculoDTO));

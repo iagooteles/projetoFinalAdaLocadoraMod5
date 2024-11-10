@@ -21,7 +21,11 @@ public class Veiculo {
     @Column(nullable = false)
     private String modelo;
     @Column(nullable = false)
+    private String previousOwner;
+    @Column(nullable = false)
     private Boolean disponivel;
     @Column(precision = 16, scale = 2, nullable = false)
-    private BigDecimal valorDiaria;
+    private BigDecimal valorDiariaReais;
+    @Column(precision = 16, scale = 2)
+    private BigDecimal valorDiariaDollar;
 }

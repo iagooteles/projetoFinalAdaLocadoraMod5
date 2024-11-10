@@ -21,6 +21,10 @@ public class VeiculoService {
 
     @Autowired
     private VeiculoRepository veiculoRepository;
+    @Autowired
+    private NameService nameService;
+    @Autowired
+    private ExchangeService exchangeService;
 
     public List<VeiculoDTO> listarTodos() {
         return this.veiculoRepository
@@ -31,7 +35,7 @@ public class VeiculoService {
     }
 
     public ResponsePagingDTO<?> listarTodosPaging(int pageNumber, int pageSize) {
-        Page<Veiculo> page = this.veiculoRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "valorDiaria"));
+        Page<Veiculo> page = this.veiculoRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "valorDiariaReais"));
         List<VeiculoDTO> list = page.stream().map(this::convert).toList();
 
         return ResponsePagingDTO.builder().pageNumber(page.getNumber()).list(Collections.singletonList(list))
@@ -42,6 +46,14 @@ public class VeiculoService {
         return veiculoRepository.findByPlaca(placa).orElse(null);
     }
 
+    public List<VeiculoDTO> listarTodosDisponiveis() {
+        return this.veiculoRepository
+                .findByDisponivelTrue()
+                .stream()
+                .map(this::convert)
+                .collect(Collectors.toList());
+    }
+
     public VeiculoDTO criar(VeiculoDTO veiculoDTO) {
         Veiculo veiculo = new Veiculo();
 
@@ -49,10 +61,25 @@ public class VeiculoService {
         veiculo.setMarca(veiculoDTO.getMarca());
         veiculo.setModelo(veiculoDTO.getModelo());
         veiculo.setDisponivel(veiculoDTO.getDisponivel());
-        veiculo.setValorDiaria(veiculoDTO.getValorDiaria());
+        veiculo.setValorDiariaReais(veiculoDTO.getValorDiariaReais());
+
+        if (veiculoDTO.getPreviousOwner() == null || veiculoDTO.getPreviousOwner().equalsIgnoreCase("")) {
+            veiculo.setPreviousOwner(nameService.getRandomName());
+            veiculoDTO.setPreviousOwner(veiculo.getPreviousOwner());
+        } else {
+            veiculo.setPreviousOwner(veiculoDTO.getPreviousOwner());
+        }
+
+        if (veiculoDTO.getValorDiariaDollar() == null) {
+
+            veiculo.setValorDiariaDollar(exchangeService.getConvertedPrice(veiculo.getValorDiariaReais()));
+            System.out.println(veiculo.getValorDiariaDollar());
+            veiculoDTO.setValorDiariaDollar(veiculo.getValorDiariaDollar());
+        } else {
+            veiculo.setValorDiariaDollar(veiculoDTO.getValorDiariaDollar());
+        }
 
         veiculoRepository.save(veiculo);
-
         return veiculoDTO;
     }
 
@@ -65,8 +92,10 @@ public class VeiculoService {
             veiculo.setPlaca(veiculoDTO.getPlaca());
             veiculo.setMarca(veiculoDTO.getMarca());
             veiculo.setModelo(veiculoDTO.getModelo());
+            veiculo.setPreviousOwner(veiculoDTO.getPreviousOwner());
             veiculo.setDisponivel(veiculoDTO.getDisponivel());
-            veiculo.setValorDiaria(veiculoDTO.getValorDiaria());
+            veiculo.setValorDiariaReais(veiculoDTO.getValorDiariaReais());
+            veiculo.setValorDiariaDollar(veiculoDTO.getValorDiariaDollar());
 
             this.veiculoRepository.save(veiculo);
             return veiculoDTO;
@@ -85,7 +114,9 @@ public class VeiculoService {
         veiculoDTO.setPlaca(veiculo.getPlaca());
         veiculoDTO.setMarca(veiculo.getMarca());
         veiculoDTO.setModelo(veiculo.getModelo());
-        veiculoDTO.setValorDiaria(veiculo.getValorDiaria());
+        veiculoDTO.setPreviousOwner(veiculo.getPreviousOwner());
+        veiculoDTO.setValorDiariaReais(veiculo.getValorDiariaReais());
+        veiculoDTO.setValorDiariaDollar(veiculo.getValorDiariaDollar());
         veiculoDTO.setDisponivel(veiculo.getDisponivel());
 
         return veiculoDTO;
