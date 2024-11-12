@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/projetoWeb.iml" filepath="$PROJECT_DIR$/.idea/projetoWeb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/projetoFinalAdaLocadoraMod5.iml" filepath="$PROJECT_DIR$/.idea/projetoFinalAdaLocadoraMod5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/projetoWeb/projetoWeb.iml" filepath="$PROJECT_DIR$/projetoWeb/projetoWeb.iml" />
     </modules>
   </component>
 </project>
