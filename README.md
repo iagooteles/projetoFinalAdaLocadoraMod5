@@ -20,7 +20,8 @@ svg" />
     </a>
     <a alt="Swagger" href="https://swagger.io/"  
 target="_blank">
-        <img src="https://img.shields.io/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white" />
+        <img src="https://img.shields.io/badge/open--API-v3.0-brightgreen.
+svg" />
     </a>
      <a alt="IntelliJ IDEA" href="https://www.jetbrains.com/idea/" target="_blank">
         <img src="https://img.shields.io/badge/IntelliJ IDEA-v1.18.32-087CFA.svg" />
@@ -44,6 +45,7 @@ O sistema permite:
 - [Diagrama de Classes](#diagrama-de-classes)
 - [Regras de Negócio](#regras-de-negócio)
 - [Acesso ao Projeto](#acesso-ao-projeto)
+- [Testes da API](#testes-da-api)
 - [Autores](#autores)
 
 ---
@@ -59,6 +61,9 @@ O sistema permite:
 ### Autenticação:
 - Validação de login com autenticação JWT.
 - Implementação de papéis de usuário.
+<br>
+<img alt="tela postman" src="./projetoWeb/images/login-token.png" width="100%"/>
+
 
 ### APIs Externas Integradas:
 - [API de Câmbio](https://docs.awesomeapi.com.br/api-de-moedas) para obter a taxa USD-BRL.
@@ -102,28 +107,38 @@ classDiagram
 ---
 ## Regras de Negócio
 
-1. Cadastro de Veículos: Não é permitido cadastrar veículos com a mesma placa.
-2. Consulta de Taxa de Câmbio: O valor da diária em dólar é calculado a partir 
+1. **Cadastro de Veículos**: Não é permitido cadastrar veículos com a mesma 
+   placa.
+2. **Consulta de Taxa de Câmbio**: O valor da diária em dólar é calculado a partir 
 do valor em reais, baseado na taxa do dia.
-3. Autenticação: Apenas usuários autenticados têm acesso às operações de 
+3. **Autenticação**: Apenas usuários autenticados têm acesso às operações de 
    cadastro e consulta de veículos.
 ---
-
 ## Acesso ao projeto
 
 Para executar o projeto:
 
 1. Clone o repositório.
-Certifique-se de ter o Java 21 e o Maven configurados.
-Execute o comando:
-bash
-Copiar código
 ```bash    
-    `git clone git@github.com:biancasanches-dev/locadora-veiculos-ada.git` 
+    ` git clone git@github.com:iagooteles/projetoFinalAdaLocadoraMod5.git` 
 ```
-2.  Abra o projeto na sua IDE de preferência.
-    <br>
+2. Certifique-se de ter o Java 21 e o Maven configurados.
+3. Execute o comando:
+``` bash
+mvn spring-boot:run
+```
 ---
+### Testes da API
+Este projeto permite a interação com a API de duas formas:
+
+1. **Swagger**
+A documentação da API está disponível no [Swagger](http://localhost:8080/swagger-ui/index.html#/), permitindo que os endpoints sejam visualizados e testados diretamente pelo navegador. Isso facilita a exploração da API sem a necessidade de uma ferramenta externa.
+<br>
+<img alt="tela do swagger" src="./projetoWeb/images/swagger.png" width="100%"/>
+
+2. **Postman**
+Para visulização e testes através do Postman, o arquivo ´locadora-veiculos-spring.postman_collection.json´, contém todos os endpoints mapeados para facilitar os testes. Bastaimportar esse arquivo no Postman e acessar os endpoints diretamente.
+
 
 ## Autores
 <table>
