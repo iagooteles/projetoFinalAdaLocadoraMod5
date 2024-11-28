@@ -33,7 +33,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody UserDTO userDTO) throws TokenInvalidException {
-        System.out.println(userDTO);
         var usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDTO.getLogin(), userDTO.getPassword());
         var authentication = this.authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 

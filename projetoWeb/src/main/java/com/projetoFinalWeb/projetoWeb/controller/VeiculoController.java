@@ -5,7 +5,6 @@ import com.projetoFinalWeb.projetoWeb.dto.VeiculoDTO;
 import com.projetoFinalWeb.projetoWeb.model.Veiculo;
 import com.projetoFinalWeb.projetoWeb.service.VeiculoService;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

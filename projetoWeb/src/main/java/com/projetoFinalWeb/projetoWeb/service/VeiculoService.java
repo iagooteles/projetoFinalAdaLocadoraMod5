@@ -73,7 +73,6 @@ public class VeiculoService {
         if (veiculoDTO.getValorDiariaDollar() == null) {
 
             veiculo.setValorDiariaDollar(exchangeService.getConvertedPrice(veiculo.getValorDiariaReais()));
-            System.out.println(veiculo.getValorDiariaDollar());
             veiculoDTO.setValorDiariaDollar(veiculo.getValorDiariaDollar());
         } else {
             veiculo.setValorDiariaDollar(veiculoDTO.getValorDiariaDollar());
