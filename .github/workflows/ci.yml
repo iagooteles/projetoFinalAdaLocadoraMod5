@@ -23,7 +23,7 @@ jobs:
 
       # Step 2: Instalar o Gradle
       - name: Configurar o Gradle
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/actions/wrapper-validation@v4
 
       # Step 3: Rodar os testes
       - name: Executar testes unitários
