@@ -18,12 +18,12 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          java-version: '21'
-          distribution: 'adopt'
+          java-version: '17'
+          distribution: 'temurin'
 
       # Step 2: Instalar o Gradle
       - name: Configurar o Gradle
-        uses: gradle/wrapper-validation-action@v3
+        uses: gradle/wrapper-validation-action@v1
 
       # Step 3: Rodar os testes
       - name: Executar testes unitários
