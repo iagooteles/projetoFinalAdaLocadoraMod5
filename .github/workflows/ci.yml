@@ -1,0 +1,38 @@
+name: CI(Continuous Integration)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'adopt'
+
+      # Step 2: Instalar o Gradle
+      - name: Configurar o Gradle
+        uses: gradle/wrapper-validation-action@v1
+
+      # Step 3: Rodar os testes
+      - name: Executar testes unitários
+        run: ./gradlew test --no-daemon
+      # Step 4: Publicar os relatórios de testes
+
+      - name: Publicar relatórios de testes
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-reports
+          path: build/reports/tests/test/
