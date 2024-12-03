@@ -30,7 +30,9 @@ jobs:
 
       # Step 4: Rodar os testes
       - name: Rodar testes com Maven
-        run: mvn clean test
+        run: |
+          cd caminho/do/diretorio/com/pom.xml
+          mvn clean test
 
       # Step 5: Publicar os relatórios de testes
       - name: Publicar relatórios de testes
