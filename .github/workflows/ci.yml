@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - # Step 1: Checar o código do repositório
+      # Step 1: Checar o código do repositório
       - name: Checkout do repositório
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
 
       # Step 2: Configurar o Java
       - name: Set up Java
