@@ -13,26 +13,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - # Step 1: Checar o código do repositório
+      - name: Checkout do repositório
       - uses: actions/checkout@v3
 
+      # Step 2: Configurar o Java
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
 
-      # Step 2: Instalar o Gradle
-      - name: Configurar o Gradle
-        uses: gradle/actions/wrapper-validation@v4
+      # Step 3: Configurar Maven
+      - name: Configurar Maven
+        run: |
+          mvn --version
 
-      # Step 3: Rodar os testes
-      - name: Executar testes unitários
-        run: ./gradlew test --no-daemon
-      # Step 4: Publicar os relatórios de testes
+      # Step 4: Rodar os testes
+      - name: Rodar testes com Maven
+        run: |
+          mvn clean test
 
+      # Step 5: Publicar os relatórios de testes
       - name: Publicar relatórios de testes
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: test-reports
-          path: build/reports/tests/test/
+          path: target/surefire-reports/
