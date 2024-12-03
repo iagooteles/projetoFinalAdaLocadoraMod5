@@ -25,14 +25,12 @@ jobs:
           distribution: 'temurin'
 
       # Step 3: Configurar Maven
-      - name: Configurar Maven
-        run: |
-          mvn --version
+      - name: Verificar se Maven está instalado
+        run: mvn --version
 
       # Step 4: Rodar os testes
       - name: Rodar testes com Maven
-        run: |
-          mvn clean test
+        run: mvn clean test
 
       # Step 5: Publicar os relatórios de testes
       - name: Publicar relatórios de testes
