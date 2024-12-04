@@ -107,6 +107,10 @@ public class VeiculoService {
         this.veiculoRepository.deleteByPlaca(placa);
     }
 
+    public VeiculoDTO converterParaDTO(Veiculo veiculo) {
+        return convert(veiculo);
+    }
+
     private VeiculoDTO convert (Veiculo veiculo) {
         VeiculoDTO veiculoDTO = new VeiculoDTO();
 
