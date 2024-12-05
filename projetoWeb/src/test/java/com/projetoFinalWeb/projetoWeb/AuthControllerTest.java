@@ -3,10 +3,8 @@ package com.projetoFinalWeb.projetoWeb;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.test.context.ActiveProfiles;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
@@ -28,7 +26,7 @@ public class AuthControllerTest {
             {
                 "login": "Lebron James",
                 "password": "betterThanJordan?",
-                "email": "kingjames@gmail.com"
+                "role": "USER"
             }
         """;
 
@@ -42,5 +40,40 @@ public class AuthControllerTest {
                 .body(equalTo("Usuario registrado"));
     }
 
-    // fazer os outros testes
+    @Test
+    public void login_shouldReturnTokenForValidCredentials() {
+        String loginPayload = """
+                {
+                    "login": "Lebron James",
+                    "password": "betterThanJordan?"
+                }
+                """;
+
+        given()
+                .body(loginPayload)
+                .contentType("application/json")
+                .when()
+                .post("/auth/login")
+                .then()
+                .statusCode(200)
+                .body("token", not(emptyOrNullString()));
+    }
+
+    @Test
+    public void login_shouldReturnUnauthorizedForInvalidCredentials() {
+        String invalidLoginPayload = """
+            {
+                "login": "MichaelJordan",
+                "password": "notLebronJames"
+            }
+        """;
+
+        given()
+                .body(invalidLoginPayload)
+                .contentType("application/json")
+                .when()
+                .post("/auth/login")
+                .then()
+                .statusCode(403);
+    }
 }
