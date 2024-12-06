@@ -10,4 +10,8 @@ public class RegisterDTO {
     private String password;
     private UserRole role;
 
+    public RegisterDTO(String newUser, String password) {
+        this.login = newUser;
+        this.password = password;
+    }
 }
