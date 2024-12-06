@@ -1,6 +1,5 @@
 package com.projetoFinalWeb.projetoWeb.repository;
 
-import com.projetoFinalWeb.projetoWeb.controller.VeiculoController;
 import com.projetoFinalWeb.projetoWeb.model.Veiculo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

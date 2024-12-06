@@ -40,13 +40,43 @@ O sistema permite:
 ---
 
 ## Sumário
-
+ 
+- [Como Executar os testes](#testes)
 - [Funcionalidades](#funcionalidades)
 - [Diagrama de Classes](#diagrama-de-classes)
 - [Regras de Negócio](#regras-de-negócio)
 - [Acesso ao Projeto](#acesso-ao-projeto)
 - [Testes da API](#testes-da-api)
 - [Autores](#autores)
+
+---
+## Testes
+
+O projeto possui uma cobertura abrangente de testes, com a implementação de testes unitários e testes de integração, garantindo a qualidade e o funcionamento correto das funcionalidades desenvolvidas. Também é utilizado uma pipeline de Integração Contínua (CI) configurado no GitHub Actions para automatizar a execução dos testes em cada push ou pull request para a branch main.
+
+Para executar os testes do projeto, você pode optar por utilizar uma IDE ou a linha de comando com Maven
+
+### Executando os testes pela IDE
+
+1. Certifique-se de que o projeto está aberto em uma IDE compatível.
+2. Navegue até a pasta src/test/java.
+3. Clique com o botão direito sobre o pacote de testes (projetoWeb)
+4. Selecione a opção "Run Tests in \'ProjetoWeb\'"
+
+### Executando os testes pelo Maven
+
+1. Certifique-se de estar no diretório raiz do projeto (onde o arquivo pom.xml está localizado) => Depois de clonar o projeto, você pode precisar navegar até a pasta projetoWeb dentro de projetoWeb, onde encontra-se o pom.xml.
+```
+cd projetoWeb
+```
+
+2. No terminal, execute o seguinte comando:
+```
+mvn test
+```
+
+3. O Maven executará todos os testes definidos no projeto e exibirá o resultado no terminal.
+
 
 ---
 ## Funcionalidades
